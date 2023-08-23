@@ -2,8 +2,9 @@ import React from "react";
 import { View, Text, Dimensions, ScrollView, StyleSheet } from "react-native";
 import Carousel, { ParallaxImage } from "react-native-snap-carousel";
 import { blogs } from "../features/blogs";
-import { Button, Card } from "react-native-elements";
-import WebView from "react-native-webview";
+import { Button, Card, Icon } from "react-native-elements";
+import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -18,8 +19,7 @@ const HomeScreen = () => {
 
   const lifestyle = blogs.filter((blog) => blog.blogType === "Lifestyle");
 
-  const spotifyURL =
-    "https://open.spotify.com/artist/3Ps6le7tj5BdNtdnfNgTU4?si=ul8PXBsFTW-ZDlB0sPa8lA";
+  const navigation = useNavigation();
 
   const renderItem = ({ item, index }, parallaxProps) => (
     <View style={{ width: screenWidth - 60, height: 200 }}>
@@ -45,7 +45,7 @@ const HomeScreen = () => {
   );
 
   return (
-    <>
+    <LinearGradient colors={["#242424", "#F5FEFD"]}>
       <ScrollView>
         <View>
           <Text
@@ -75,10 +75,25 @@ const HomeScreen = () => {
               <Card.Image source={blog.blogImage} />
               <Text style={styles.blogTitle}>{blog.title}</Text>
               <Card.Divider />
-              <Text>{blog.description}</Text>
-              <Button style={styles.readBtn} title={"Read More"} />
+              <Text style={styles.blogDescription}>{blog.description}</Text>
+              <Button
+                buttonStyle={styles.readBtn}
+                title={"Read More"}
+                onPress={() =>
+                  navigation.navigate("BlogScreen", { id: blog.id })
+                }
+              />
             </Card>
           ))}
+          <Icon
+            name="angle-down"
+            type="font-awesome"
+            color="#715C83"
+            size={70}
+            onPress={() =>
+              navigation.navigate("BlogType", { blogType: "Music Review" })
+            }
+          />
         </View>
         <View>
           <Text style={styles.blogType}>Music Reviews</Text>
@@ -87,10 +102,25 @@ const HomeScreen = () => {
               <Card.Image source={blog.blogImage} />
               <Text style={styles.blogTitle}>{blog.title}</Text>
               <Card.Divider />
-              <Text>{blog.description}</Text>
-              <Button style={styles.readBtn} title={"Read More"} />
+              <Text style={styles.blogDescription}>{blog.description}</Text>
+              <Button
+                buttonStyle={styles.readBtn}
+                title={"Read More"}
+                onPress={() =>
+                  navigation.navigate("BlogScreen", { id: blog.id })
+                }
+              />
             </Card>
           ))}
+          <Icon
+            name="angle-down"
+            type="font-awesome"
+            color="#715C83"
+            size={70}
+            onPress={() =>
+              navigation.navigate("BlogType", { blogType: "Artist Spotlight" })
+            }
+          />
         </View>
         <View>
           <Text style={styles.blogType}>Music Reviews</Text>
@@ -99,13 +129,28 @@ const HomeScreen = () => {
               <Card.Image source={blog.blogImage} />
               <Text style={styles.blogTitle}>{blog.title}</Text>
               <Card.Divider />
-              <Text>{blog.description}</Text>
-              <Button style={styles.readBtn} title={"Read More"} />
+              <Text style={styles.blogDescription}>{blog.description}</Text>
+              <Button
+                buttonStyle={styles.readBtn}
+                title={"Read More"}
+                onPress={() =>
+                  navigation.navigate("BlogScreen", { id: blog.id })
+                }
+              />
             </Card>
           ))}
+          <Icon
+            name="angle-down"
+            type="font-awesome"
+            color="#715C83"
+            size={70}
+            onPress={() =>
+              navigation.navigate("BlogType", { blogType: "Lifestyle" })
+            }
+          />
         </View>
       </ScrollView>
-    </>
+    </LinearGradient>
   );
 };
 
@@ -119,6 +164,7 @@ const styles = StyleSheet.create({
   },
   card: {
     borderRadius: 8,
+    backgroundColor: "#F5FEFD",
   },
   blogTitle: {
     fontSize: 18,
@@ -129,6 +175,11 @@ const styles = StyleSheet.create({
   },
   readBtn: {
     backgroundColor: "#715C83",
+  },
+  blogDescription: {
+    marginBottom: 20,
+    fontSize: 16,
+    textAlign: "center",
   },
 });
 
