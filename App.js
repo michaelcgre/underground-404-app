@@ -33,8 +33,16 @@ function HomeStackScreen() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="BlogType" component={BlogTypeScreen} />
-      <Stack.Screen name="BlogScreen" component={BlogScreen} />
+      <Stack.Screen
+        name="BlogType"
+        component={BlogTypeScreen}
+        options={{ title: "Blog Type" }}
+      />
+      <Stack.Screen
+        name="BlogScreen"
+        component={BlogScreen}
+        options={{ title: "Blog Types" }}
+      />
     </Stack.Navigator>
   );
 }
