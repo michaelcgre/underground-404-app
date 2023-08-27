@@ -1,8 +1,9 @@
 import { ScrollView } from "react-native-gesture-handler";
 import { blogs } from "../features/blogs";
-import { Button, Card, Icon } from "react-native-elements";
+import { Card, Icon } from "react-native-elements";
 import { View, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const BlogTypesScreen = () => {
   const navigation = useNavigation();
@@ -18,83 +19,100 @@ const BlogTypesScreen = () => {
   const lifestyle = blogs.filter((blog) => blog.blogType === "Lifestyle");
 
   return (
-    <ScrollView>
-      <View>
-        <Text style={styles.blogType}>Music Reviews</Text>
-        {musicReviews.map((blog) => (
-          <Card containerStyle={styles.card} key={blog.id}>
-            <Card.Image source={blog.blogImage} />
-            <Text style={styles.blogTitle}>{blog.title}</Text>
-            <Card.Divider />
-            <Text style={styles.blogDescription}>{blog.description}</Text>
-            <Button
-              buttonStyle={styles.readBtn}
-              title={"Read More"}
-              onPress={() => navigation.navigate("BlogScreen", { id: blog.id })}
-            />
-          </Card>
-        ))}
-        <Icon
-          name="angle-down"
-          type="font-awesome"
-          color="#715C83"
-          size={70}
-          onPress={() =>
-            navigation.navigate("BlogType", { blogType: "Music Review" })
-          }
-        />
-      </View>
-      <View>
-        <Text style={styles.blogType}>Artist Spotlight</Text>
-        {artistSpotlight.map((blog) => (
-          <Card containerStyle={styles.card} key={blog.id}>
-            <Card.Image source={blog.blogImage} />
-            <Text style={styles.blogTitle}>{blog.title}</Text>
-            <Card.Divider />
-            <Text style={styles.blogDescription}>{blog.description}</Text>
-            <Button
-              buttonStyle={styles.readBtn}
-              title={"Read More"}
-              onPress={() => navigation.navigate("BlogScreen", { id: blog.id })}
-            />
-          </Card>
-        ))}
-        <Icon
-          name="angle-down"
-          type="font-awesome"
-          color="#715C83"
-          size={70}
-          onPress={() =>
-            navigation.navigate("BlogType", { blogType: "Artist Spotlight" })
-          }
-        />
-      </View>
-      <View>
-        <Text style={styles.blogType}>Lifestyle</Text>
-        {lifestyle.map((blog) => (
-          <Card containerStyle={styles.card} key={blog.id}>
-            <Card.Image source={blog.blogImage} />
-            <Text style={styles.blogTitle}>{blog.title}</Text>
-            <Card.Divider />
-            <Text style={styles.blogDescription}>{blog.description}</Text>
-            <Button
-              buttonStyle={styles.readBtn}
-              title={"Read More"}
-              onPress={() => navigation.navigate("BlogScreen", { id: blog.id })}
-            />
-          </Card>
-        ))}
-        <Icon
-          name="angle-down"
-          type="font-awesome"
-          color="#715C83"
-          size={70}
-          onPress={() =>
-            navigation.navigate("BlogType", { blogType: "Lifestyle" })
-          }
-        />
-      </View>
-    </ScrollView>
+    <LinearGradient colors={["#242424", "#F5FEFD"]}>
+      <ScrollView>
+        <View>
+          <Text style={styles.blogType}>Music Reviews</Text>
+          {musicReviews.map((blog) => (
+            <Card containerStyle={styles.card} key={blog.id}>
+              <Card.Image source={blog.blogImage} />
+              <Text style={styles.blogTitle}>{blog.title}</Text>
+              <Card.Divider />
+              <Text style={styles.blogDescription}>{blog.description}</Text>
+              <Icon
+                name="arrow-right"
+                type="font-awesome"
+                color="#715C83"
+                size={40}
+                containerStyle={styles.iconContainer}
+                onPress={() =>
+                  navigation.navigate("BlogScreen", { id: blog.id })
+                }
+              />
+            </Card>
+          ))}
+          <Icon
+            name="angle-down"
+            type="font-awesome"
+            color="#715C83"
+            size={70}
+            onPress={() =>
+              navigation.navigate("BlogType", { blogType: "Music Review" })
+            }
+          />
+        </View>
+        <View>
+          <Text style={styles.blogType}>Artist Spotlight</Text>
+          {artistSpotlight.map((blog) => (
+            <Card containerStyle={styles.card} key={blog.id}>
+              <Card.Image source={blog.blogImage} />
+              <Text style={styles.blogTitle}>{blog.title}</Text>
+              <Card.Divider />
+              <Text style={styles.blogDescription}>{blog.description}</Text>
+              <Icon
+                name="arrow-right"
+                type="font-awesome"
+                color="#715C83"
+                size={40}
+                containerStyle={styles.iconContainer}
+                onPress={() =>
+                  navigation.navigate("BlogScreen", { id: blog.id })
+                }
+              />
+            </Card>
+          ))}
+          <Icon
+            name="angle-down"
+            type="font-awesome"
+            color="#715C83"
+            size={70}
+            onPress={() =>
+              navigation.navigate("BlogType", { blogType: "Artist Spotlight" })
+            }
+          />
+        </View>
+        <View>
+          <Text style={styles.blogType}>Lifestyle</Text>
+          {lifestyle.map((blog) => (
+            <Card containerStyle={styles.card} key={blog.id}>
+              <Card.Image source={blog.blogImage} />
+              <Text style={styles.blogTitle}>{blog.title}</Text>
+              <Card.Divider />
+              <Text style={styles.blogDescription}>{blog.description}</Text>
+              <Icon
+                name="arrow-right"
+                type="font-awesome"
+                color="#715C83"
+                size={40}
+                containerStyle={styles.iconContainer}
+                onPress={() =>
+                  navigation.navigate("BlogScreen", { id: blog.id })
+                }
+              />
+            </Card>
+          ))}
+          <Icon
+            name="angle-down"
+            type="font-awesome"
+            color="#715C83"
+            size={70}
+            onPress={() =>
+              navigation.navigate("BlogType", { blogType: "Lifestyle" })
+            }
+          />
+        </View>
+      </ScrollView>
+    </LinearGradient>
   );
 };
 
@@ -124,6 +142,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 16,
     textAlign: "center",
+  },
+  iconContainer: {
+    alignSelf: "flex-end",
   },
 });
 

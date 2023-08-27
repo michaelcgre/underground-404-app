@@ -1,8 +1,15 @@
 import React from "react";
-import { View, Text, Dimensions, ScrollView, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import Carousel, { ParallaxImage } from "react-native-snap-carousel";
 import { blogs } from "../features/blogs";
-import { Button, Card, Icon } from "react-native-elements";
+import { Card, Icon } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 
@@ -19,15 +26,33 @@ const HomeScreen = () => {
 
   const lifestyle = blogs.filter((blog) => blog.blogType === "Lifestyle");
 
+  const TouchableParallaxImage = ({
+    source,
+    onPress,
+    parallaxProps,
+    containerStyle,
+  }) => {
+    return (
+      <TouchableOpacity onPress={onPress} style={{ flex: 1 }}>
+        <ParallaxImage
+          source={source}
+          containerStyle={containerStyle}
+          parallaxFactor={0.4}
+          {...parallaxProps}
+        />
+      </TouchableOpacity>
+    );
+  };
+
   const navigation = useNavigation();
 
   const renderItem = ({ item, index }, parallaxProps) => (
     <View style={{ width: screenWidth - 60, height: 200 }}>
-      <ParallaxImage
+      <TouchableParallaxImage
         source={item.carouselImage}
         containerStyle={{ flex: 1, borderRadius: 8 }}
-        parallaxFactor={0.4}
-        {...parallaxProps}
+        parallaxProps={parallaxProps}
+        onPress={() => navigation.navigate("BlogScreen", { id: item.id })}
       />
       <Text
         style={{
@@ -76,9 +101,12 @@ const HomeScreen = () => {
               <Text style={styles.blogTitle}>{blog.title}</Text>
               <Card.Divider />
               <Text style={styles.blogDescription}>{blog.description}</Text>
-              <Button
-                buttonStyle={styles.readBtn}
-                title={"Read More"}
+              <Icon
+                name="arrow-right"
+                type="font-awesome"
+                color="#715C83"
+                size={40}
+                containerStyle={styles.iconContainer}
                 onPress={() =>
                   navigation.navigate("BlogScreen", { id: blog.id })
                 }
@@ -103,9 +131,12 @@ const HomeScreen = () => {
               <Text style={styles.blogTitle}>{blog.title}</Text>
               <Card.Divider />
               <Text style={styles.blogDescription}>{blog.description}</Text>
-              <Button
-                buttonStyle={styles.readBtn}
-                title={"Read More"}
+              <Icon
+                name="arrow-right"
+                type="font-awesome"
+                color="#715C83"
+                size={40}
+                containerStyle={styles.iconContainer}
                 onPress={() =>
                   navigation.navigate("BlogScreen", { id: blog.id })
                 }
@@ -130,9 +161,12 @@ const HomeScreen = () => {
               <Text style={styles.blogTitle}>{blog.title}</Text>
               <Card.Divider />
               <Text style={styles.blogDescription}>{blog.description}</Text>
-              <Button
-                buttonStyle={styles.readBtn}
-                title={"Read More"}
+              <Icon
+                name="arrow-right"
+                type="font-awesome"
+                color="#715C83"
+                size={40}
+                containerStyle={styles.iconContainer}
                 onPress={() =>
                   navigation.navigate("BlogScreen", { id: blog.id })
                 }
@@ -173,8 +207,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontWeight: "bold",
   },
-  readBtn: {
-    backgroundColor: "#715C83",
+  iconContainer: {
+    alignSelf: "flex-end",
   },
   blogDescription: {
     marginBottom: 20,

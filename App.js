@@ -6,6 +6,7 @@ import BlogTypesScreen from "./screens/BlogTypesScreen";
 import BlogTypeScreen from "./screens/BlogTypeScreen";
 import { Icon } from "react-native-elements";
 import BlogScreen from "./screens/BlogScreen";
+import SearchScreen from "./screens/SearchScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -13,8 +14,16 @@ const Stack = createStackNavigator();
 function BlogTypesStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="BlogTypes" component={BlogTypesScreen} />
-      <Stack.Screen name="BlogType" component={BlogTypeScreen} />
+      <Stack.Screen
+        name="BlogTypes"
+        component={BlogTypesScreen}
+        options={{ title: "Blog Types" }}
+      />
+      <Stack.Screen
+        name="BlogType"
+        component={BlogTypeScreen}
+        options={{ title: "Blog Type" }}
+      />
       <Stack.Screen name="BlogScreen" component={BlogScreen} />
     </Stack.Navigator>
   );
@@ -35,10 +44,11 @@ function HomeTabs() {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: { backgroundColor: "#F5FEFD" },
+        headerShown: false,
       }}
     >
       <Tab.Screen
-        name="HomeStack"
+        name="HomeScreen"
         component={HomeStackScreen}
         options={{
           tabBarLabel: () => null,
@@ -48,12 +58,23 @@ function HomeTabs() {
         }}
       />
       <Tab.Screen
-        name="BlogTypesStack"
+        name="Discover"
         component={BlogTypesStack}
         options={{
           tabBarLabel: () => null,
           tabBarIcon: ({ color, size }) => (
             <Icon name="list" color={"#715C83"} size={30} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          headerShown: true,
+          tabBarLabel: () => null,
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="search" color={"#715C83"} size={30} />
           ),
         }}
       />
